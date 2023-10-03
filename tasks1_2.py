@@ -1,7 +1,7 @@
 from collections import Counter
 from math import log2
 
-FILE_PATH = R'1.txt'
+FILE_PATH = r"D:\Загружено\otik-master\labs-files\Файлы в формате простого текста — utf8\Лев Николаевич Толстой. Война и мир 1.txt"
 USE_UNICODE = True
 FILE_OPEN_MODE = {'mode': 'r', 'encoding': 'utf-8'} if USE_UNICODE else {'mode': 'rb'}
 
@@ -43,16 +43,16 @@ def display_table(sym_amounts: Counter):
     ]
 
     print('\nSorted by symbol:')
-    print(f"{'Hex symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
+    print(f"{'Symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
     for row in sorted(table, key=lambda x: x[0]):
         sym, freq, prob, inf = row
-        print(f"{sym:12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
+        print(f"{('{newline}' if ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
 
     print('\nSorted by frequency:')
-    print(f"{'Hex symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
+    print(f"{'Symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
     for row in sorted(table, key=lambda x: x[1], reverse=True):
         sym, freq, prob, inf = row
-        print(f"{sym:12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
+        print(f"{('{newline}' if ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
 
 
 def main(file_path: str):
