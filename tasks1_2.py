@@ -1,14 +1,18 @@
 from collections import Counter
 from math import log2
 
+FILE_PATH = R'1.txt'
+USE_UNICODE = True
+FILE_OPEN_MODE = {'mode': 'r', 'encoding': 'utf-8'} if USE_UNICODE else {'mode': 'rb'}
+
 
 def file_length(file_path: str) -> int:
-    with open(file_path, 'rb') as file:
+    with open(file_path, **FILE_OPEN_MODE) as file:
         return len(file.read())
 
 
 def symbol_amounts(file_path: str) -> Counter:
-    with open(file_path, 'rb') as file:
+    with open(file_path, **FILE_OPEN_MODE) as file:
         return Counter(file.read())
 
 
@@ -31,7 +35,7 @@ def symbol_information(symbol_frequency: float) -> float:
 def display_table(sym_amounts: Counter):
     total_symbols = sum(sym_amounts.values())
     table = [(
-        f'{hex(symbol)[2:]:0>2}',
+        symbol if USE_UNICODE else f'{hex(symbol)[2:]:0>2}',
         freq,
         probability(freq, total_symbols),
         symbol_information(probability(freq, total_symbols))
@@ -60,4 +64,4 @@ def main(file_path: str):
 
 
 if __name__ == '__main__':
-    main(r'D:\Music\Lorna Shore - To the Hellfire.flac')
+    main(FILE_PATH)
