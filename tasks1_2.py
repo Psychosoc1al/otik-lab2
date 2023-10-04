@@ -1,7 +1,7 @@
 from collections import Counter
 from math import log2
 
-FILE_PATH = r"D:\Загружено\otik-master\labs-files\Файлы в формате простого текста — utf8\Лев Николаевич Толстой. Война и мир 1.txt"
+FILE_PATH = r'Файлы в формате простого текста — utf8/Лев Николаевич Толстой. Война и мир 1.txt'
 USE_UNICODE = False
 FILE_OPEN_MODE = {'mode': 'r', 'encoding': 'utf-8'} if USE_UNICODE else {'mode': 'rb'}
 

@@ -1,8 +1,8 @@
 from collections import Counter
 from os import walk, path
 
-FOLDER_PATH = r'D:\Загружено\otik-master\labs-files\Файлы в формате простого текста — кодировки разные'
-FILE_PATH = r'D:\Загружено\otik-master\labs-files\Варианты 2 — определение кодировки простого текста\2.txt'
+FOLDER_PATH = r'Файлы в формате простого текста — кодировки разные'
+FILE_PATH = r'Варианты 2 — определение кодировки простого текста\2.txt'
 ENCODINGS = ['ascii',
              'big5',
              'big5hkscs',
