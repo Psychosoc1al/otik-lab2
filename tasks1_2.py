@@ -2,7 +2,7 @@ from collections import Counter
 from math import log2
 
 FILE_PATH = r"D:\Загружено\otik-master\labs-files\Файлы в формате простого текста — utf8\Лев Николаевич Толстой. Война и мир 1.txt"
-USE_UNICODE = True
+USE_UNICODE = False
 FILE_OPEN_MODE = {'mode': 'r', 'encoding': 'utf-8'} if USE_UNICODE else {'mode': 'rb'}
 
 
@@ -32,7 +32,7 @@ def symbol_information(symbol_frequency: float) -> float:
     return -log2(symbol_frequency)
 
 
-def display_table(sym_amounts: Counter):
+def display_table(sym_amounts: Counter) -> None:
     total_symbols = sum(sym_amounts.values())
     table = [(
         symbol if USE_UNICODE else f'{hex(symbol)[2:]:0>2}',
@@ -46,16 +46,17 @@ def display_table(sym_amounts: Counter):
     print(f"{'Symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
     for row in sorted(table, key=lambda x: x[0]):
         sym, freq, prob, inf = row
-        print(f"{('{newline}' if ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
+        print(f"{('{newline}' if USE_UNICODE and ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
 
+    sorted_by_frequency = sorted(table, key=lambda x: x[1], reverse=True)
     print('\nSorted by frequency:')
     print(f"{'Symbol':12} {'Frequency':10} {'Probability':12} {'Information':12}")
-    for row in sorted(table, key=lambda x: x[1], reverse=True):
+    for row in sorted_by_frequency:
         sym, freq, prob, inf = row
-        print(f"{('{newline}' if ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
+        print(f"{('{newline}' if USE_UNICODE and ord(sym) == 10 else sym):12} {freq:<10} {prob:<12.7f} {inf:<12.7f}")
 
 
-def main(file_path: str):
+def main(file_path: str) -> None:
     print(f'File Length (in symbols): {file_length(file_path)}')
     sym_amounts = symbol_amounts(file_path)
     bits_info, bytes_info = total_information(sym_amounts)
